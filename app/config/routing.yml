@@ -1,0 +1,4 @@
+chm_mp_form:
+    resource: "@ChmMPFormBundle/Resources/config/routing.yml"
+    prefix:   /
+
