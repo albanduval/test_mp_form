@@ -1,0 +1,4 @@
+services:
+#    chm_mp_form.example:
+#        class: Chm\MPFormBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
