@@ -1,1 +1,33 @@
-Hello {{ name }}!
+{% extends 'MopaBootstrapBundle::base_less.html.twig' %}
+
+{% block head_script %}
+{% javascripts
+    'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'
+%}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+{% endblock head_script %}
+
+{% block head_style %}
+    {# Override this block to add your own files! #}
+    {% stylesheets
+        '@ChmMPFormBundle/Resources/public/less/bootstrap.less'
+    %}
+    {# % stylesheets
+        '@MopaBootstrapBundle/Resources/public/less/mopabootstrapbundle.less'
+    % #}
+    <link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="screen" />
+    {% endstylesheets %}
+    {# To use this without less use the base_css.html.twig template as your base
+     # Be sure you understand whats going on: have a look into
+     # https://github.com/phiamo/MopaBootstrapBundle/blob/master/Resources/doc/css-vs-less.md
+     #}
+{% endblock head_style %}
+
+{% block body %}
+
+<div class="col-lg-6">
+{{ form(form) }}
+</div>
+
+{% endblock body %}

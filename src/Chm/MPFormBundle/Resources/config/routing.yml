@@ -1,3 +1,3 @@
 chm_mp_form_homepage:
-    path:     /hello/{name}
+    path:     /
     defaults: { _controller: ChmMPFormBundle:Default:index }
