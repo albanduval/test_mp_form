@@ -59,11 +59,12 @@ class Quotation
     private $back_color_count;
 
     /**
-     * @var string
+     * @var Chm\MPFormBundle\Entity\User
      *
-     * @ORM\Column(name="email", type="string", length=512)
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="quotations")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
-    private $email;
+    private $user;
 
 
     /**
@@ -168,30 +169,6 @@ class Quotation
     {
         return $this->color;
     }
-
-    /**
-     * Set email
-     *
-     * @param string $email
-     * @return Quotation
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    /**
-     * Get email
-     *
-     * @return string 
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
     /**
      * Set front_color_count
      *

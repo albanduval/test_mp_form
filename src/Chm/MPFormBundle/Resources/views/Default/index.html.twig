@@ -1,4 +1,5 @@
 {% extends 'MopaBootstrapBundle::base_less.html.twig' %}
+{% from 'MopaBootstrapBundle::flash.html.twig' import session_flash %}
 
 {% block head_script %}
 {% javascripts
@@ -24,10 +25,21 @@
      #}
 {% endblock head_style %}
 
-{% block body %}
+{% block content %}
 
-<div class="col-lg-6">
-{{ form(form) }}
-</div>
+    <div class="col-lg-3">
+        <h3>Basic form</h3>
+        <p>With v3.0, we have smarter defaults for form styles.</p>
+    </div>
+    <div class="col-lg-9">
+        {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <div class="form-group btn-group col-xs-12 col-sm-6 col-md-6  col-md-offset-6">
+                <div class="">
+                    <button type="submit" class="btn btn-primary">Recevoir le devis</button>
+                </div
+            </div>
+        </form>
+    </div>
 
-{% endblock body %}
+{% endblock content %}
