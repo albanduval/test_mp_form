@@ -61,17 +61,16 @@ class Quotation
     /**
      * @var Chm\MPFormBundle\Entity\User
      *
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="quotations")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="quotations",cascade={"persist"})
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
 
 
     /**
-     * @var Chm\MPFormBundle\Entity\Size
+     * Get id
      *
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="quotations")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @return integer 
      */
     public function getId()
     {
@@ -213,5 +212,25 @@ class Quotation
     public function getBackColorCount()
     {
         return $this->back_color_count;
+    }
+
+    public function calculate()
+    {
+        $this->unitPriceVATexcluded = 0;
+        $this->totalVATexcluded = 0;
+        $this->VATrate = 20.6;
+        $this->totalVATincluded = 0;
+
+        // calculate unit price (which depends on t-shirt quantity)
+        $this->unitPriceVATexcluded = $this->getUnitPrice();
+        $this->unitPriceVATincluded = $this->unitPriceVATexcluded * $this->VATrate;
+
+        // total price 
+        $this->totalVATexcluded = $this->quantity * $this->unitPriceVATexcluded;
+        $this->totalVATincluded = $this->quantity * $this->unitPriceVATincluded;
+    }
+
+    public function getUnitPrice($VATincluded = false) {
+        //
     }
 }

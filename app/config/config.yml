@@ -77,9 +77,11 @@ swiftmailer:
 
 mopa_bootstrap:
     form:
-        horizontal_label_class:  false
-        horizontal_input_wrapper_class:  ""
+        #horizontal_label_class:  true
+        #horizontal_input_wrapper_class:  ""
+        #horizontal_label_offset_class:   "col-lg-10"
         render_required_asterisk:  true
+        render_optional_text:      false
     icons:
         icon_set: fontawesome4
         shortcut: icon

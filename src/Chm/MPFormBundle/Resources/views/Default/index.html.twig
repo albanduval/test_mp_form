@@ -25,21 +25,63 @@
      #}
 {% endblock head_style %}
 
+
+{% block choice_widget_expanded %}
+    {% spaceless %}
+        {% set label_attr = label_attr|merge({'class': (label_attr.class|default(''))}) %}
+        {% set label_attr = label_attr|merge({'class': (label_attr.class ~ ' ' ~ (widget_type != '' ? (multiple ? 'checkbox' : 'radio') ~ '-' ~ widget_type : ''))}) %}
+        {% if expanded %}
+            {% set attr = attr|merge({'class': attr.class|default('') ~ ' '}) %}
+        {% endif %}
+        {% if widget_type == 'inline-btn' %}
+            <div class="btn-group" data-toggle="buttons">
+        {% endif %}
+        {% for child in form %}
+            {% if widget_type not in ['inline', 'inline-btn'] %}
+                <div class="{{ multiple ? 'checkbox' : 'radio' }}"
+                {%- if widget_type == 'inline-btn' %} class="btn-group" data-toggle="buttons"{% endif %}>
+            {% endif %}
+            {% if widget_type == 'inline-btn' %}
+                {% set label_attr = attr|default({})|merge({'class': 'btn ' ~ attr.class|default('')}) %}
+            {% endif %}
+            {% if child.vars.checked and widget_type == 'inline-btn' %}
+                {% set label_attr_copy = label_attr|default({})|merge({'class': 'active ' ~ label_attr.class|default('')}) %}
+            {% else %}
+                {% set label_attr_copy = label_attr|default({}) %}
+            {% endif %}
+            <label{% for attrname, attrvalue in label_attr_copy %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
+            {{ form_widget(child, {'horizontal_label_class': horizontal_label_class, 'horizontal_input_wrapper_class': horizontal_input_wrapper_class, 'attr': {'class': attr.widget_class|default('') }}) }}
+            {% if widget_type == 'inline-btn' or widget_checkbox_label == 'widget'%}
+                {{ child.vars.label|trans({}, translation_domain)|raw }}
+            {% else %}
+                {{ child.vars.label|trans({}, translation_domain) }}
+            {% endif %}
+            </label>
+            {% if widget_type not in ['inline', 'inline-btn'] %}
+                </div>
+            {% endif %}
+        {% endfor %}
+        {% if widget_type == 'inline-btn' %}
+            </div>
+        {% endif %}
+    {% endspaceless %}
+{% endblock choice_widget_expanded %}
+
 {% block content %}
 
-    <div class="col-lg-3">
-        <h3>Basic form</h3>
-        <p>With v3.0, we have smarter defaults for form styles.</p>
+    <div class="col-lg-5">
+        <h3>Boutique</h3>
+        <p>Pour acheter des t-shirts à l'unité, retrouvez-nous sur notre <a href="http://www.google.com">boutique CDiscount.com</a>.</p>
     </div>
-    <div class="col-lg-9">
+    <div class="col-lg-7">
+        <h3>Demande de devis</h3>
         {{ form_start(form) }}
             {{ form_widget(form) }}
-            <div class="form-group btn-group col-xs-12 col-sm-6 col-md-6  col-md-offset-6">
-                <div class="">
-                    <button type="submit" class="btn btn-primary">Recevoir le devis</button>
-                </div
-            </div>
         </form>
     </div>
 
 {% endblock content %}
+
+{% block footer %}
+<p>&copy; MP Boutik 2014</p>
+{% endblock footer %}

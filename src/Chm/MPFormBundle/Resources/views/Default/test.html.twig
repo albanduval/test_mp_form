@@ -1,0 +1,25 @@
+{# MopaBootstrapSandboxBundle:Examples:choices.html.twig #}
+
+{% extends 'MopaBootstrapBundle::base_less.html.twig' %}
+{% from 'MopaBootstrapBundle::flash.html.twig' import session_flash %}
+
+{% block headline %}Choice Widgets{% endblock headline %}
+
+{% block content %}
+<div class="col-lg-6">
+    <form action="#" class="form-horizontal" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form) }}
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Save changes</button>
+            <button type="reset" class="btn">Cancel</button>
+        </div>
+    </form>
+</div>
+<div class="col-lg-6">
+    <h3>Choice form widgets</h3>
+    <p>Here we try to show all possible choice form widgets</p>
+    <hr>
+    <p>And there is a lot to do</p>
+</div>
+{% endblock content %}
